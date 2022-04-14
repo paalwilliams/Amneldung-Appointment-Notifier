@@ -21,7 +21,7 @@ export default class BrowserNavigator {
             console.log("Launching Anmeldung Appointment Finder...");
             let chrome = await chromeLauncher.launch({
                 userDataDir: false,
-                // chromeFlags: ['--headless']
+                chromeFlags: ['--headless']
             })
             const resp = await util.promisify(request)(`http://localhost:${chrome.port}/json/version`);
             const { webSocketDebuggerUrl } = JSON.parse(resp.body);
@@ -49,7 +49,7 @@ export default class BrowserNavigator {
     }
 
     public async isAppointmentAvailable() {
-        console.clear()
+        // console.clear()
         console.log('Checking for available appointments...')
         let apptAvailable = await this.activePage.evaluate(() => {
             let calendar = document.querySelector('.calendar-table');
